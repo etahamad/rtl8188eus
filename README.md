@@ -1,27 +1,3 @@
-If you are are taking "Learn Ethical Hacking From Scratch | Udemy" by Zaid Sabih and using Kali 2022 x64 Customized by zSecurity 1.0.7 and TP-Link TL-WN722N v2/v3 [Realtek RTL8188EUS], you might find this helpful. In the begining, I am able to enter monitor mode. However after a few days, I found out it doesn't allow to enter monitor mode. I think  TP-Link TL-WN722N v2/v3 have automatically updated its driver. Then, I find a video from David Bombal (https://www.youtube.com/watch?v=tYnjMiTTdms) but still can't perfectly solve the issue. However, I find below steps work fine for me.
-
-1. sudo apt update
-2. sudo apt upgrade 
-3. sudo apt-get dist-upgrade
-4. reboot
-5. sudo apt-get install linux-headers-$(uname -r)
-6. sudo apt install bc 
-7. sudo apt-get install build-essential
-8. sudo apt-get install libelf-dev
-10. sudo apt install dkms
-11. sudo rmmod r8188eu.ko 
-12. git clone https://github.com/etahamad/rtl8188eus
-13. cd rtl8188eus
-14. sudo -i
-15. echo 'blacklist r8188eu'|sudo tee -a '/etc/modprobe.d/realtek.conf'
-16. reboot
-17. cd rtl8188eus 
-18. sudo make && make install
-19. reboot 
-
-Like https://github.com/cccooo/rtl8812au-centos-7.6, forked from aircrack-ng/rtl8188eus and modified for CentOS 7.9
-as CentOS Kernel 3.10 contains many code from 4.x
-
 ## rtl8188eus development branch
 
 # Realtek rtl8188eus &amp; rtl8188eu &amp; rtl8188etv WiFi drivers
@@ -46,12 +22,17 @@ as CentOS Kernel 3.10 contains many code from 4.x
 ... And a bunch of various wifi chipsets
 
 # Howto build/install
-1. You will need to blacklist another driver in order to use this one.
-2. `echo 'blacklist r8188eu'|sudo tee -a '/etc/modprobe.d/realtek.conf'`
-3. Reboot
-4. cd rtl8188eus
-5. `make && sudo make install`
+1. Update your apt list `sudo apt update && sudo apt upgrade`
+2. Install your linux header in order to compile the driver `sudo apt-get install linux-headers-$(uname -r)`
+    - If this gives you an error, then you need to update your distro `sudo apt-get dist-upgrade` then reboot to upgrade the dirsto `sudo reboot`
+3. Install extra `sudo apt install bc build-essential libelf-dev dkms`
+4. Unload the driver `sudo rmmod r8188eu.ko`
+2. Blacklist the original driver in order to use this one. `sudo echo 'blacklist r8188eu'|sudo tee -a '/etc/modprobe.d/realtek.conf'`
+1. Clone the driver `git clone https://github.com/etahamad/rtl8188eus`
+4. Enter the driver dir`cd rtl8188eus`
+5. Compile the driver `sudo make && sudo make install`
 6. Reboot in order to blacklist and load the new driver/module.
+9. Load the new driver `sudo modprobe 8188eu`
 
 # MONITOR MODE howto
 Use these steps to enter monitor mode.
