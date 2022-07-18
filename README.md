@@ -22,7 +22,7 @@ If you are are taking "Learn Ethical Hacking From Scratch | Udemy" by Zaid Sabih
 Like https://github.com/cccooo/rtl8812au-centos-7.6, forked from aircrack-ng/rtl8188eus and modified for CentOS 7.9
 as CentOS Kernel 3.10 contains many code from 4.x
 
-## rtl8188eus v5.3.9
+## rtl8188eus development branch
 
 # Realtek rtl8188eus &amp; rtl8188eu &amp; rtl8188etv WiFi drivers
 
